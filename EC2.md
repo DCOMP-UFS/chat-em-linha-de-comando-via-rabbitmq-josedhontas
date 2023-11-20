@@ -50,3 +50,7 @@ sudo rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
 ```
 sudo rabbitmq-plugins enable rabbitmq_management
 ```
+
+### Passo 5 – Liberar portas do TCP
+
+#### Liberar portas 15672 e 5672
