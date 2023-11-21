@@ -1,4 +1,4 @@
-package com.microservico.etapa1.conections;
+package com.microservico.etapa1.chat;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
@@ -72,6 +72,10 @@ public class ChatRabbit {
   public void setDestino(String destinoNome){
     this.destinoNome = destinoNome;
     this.criaFila(destinoNome);
+  }
+
+  public String getDestino(){
+    return this.destinoNome;
   }
 
   public void setOrigem(String origemNome){
