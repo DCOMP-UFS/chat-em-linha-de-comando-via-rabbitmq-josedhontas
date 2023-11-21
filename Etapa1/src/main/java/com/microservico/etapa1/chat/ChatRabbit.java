@@ -64,7 +64,7 @@ public class ChatRabbit {
     return new Binding(fila.getName(), Binding.DestinationType.QUEUE, troca.getName(), fila.getName(), null);
   }
 
-  @PostConstruct public void nada(){
+  @PostConstruct public void incializacao(){
     System.out.println("Chat iniciado...");
 
   }
@@ -76,6 +76,10 @@ public class ChatRabbit {
 
   public String getDestino(){
     return this.destinoNome;
+  }
+
+  public String getOrigem(){
+    return this.origemNome;
   }
 
   public void setOrigem(String origemNome){

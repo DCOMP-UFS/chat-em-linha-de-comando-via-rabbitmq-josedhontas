@@ -1,6 +1,7 @@
 package com.microservico.etapa1;
 
 import com.microservico.etapa1.chat.ChatRabbit;
+import com.microservico.etapa1.thread.ReceberMensagensThread;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -18,18 +19,8 @@ public class Etapa1 {
       String nomeUsuario = scanner.nextLine();
       chatRabbit.setOrigem(nomeUsuario);
 
-      Thread threadReceberMensagens = new Thread(() -> {
-        while (true) {
-          String mensagemRecebida = chatRabbit.receberMensagemDaFila();
-          String nomeDestino = chatRabbit.getDestino();
-          if (mensagemRecebida != null) {
-            System.out.println(mensagemRecebida);
-            System.out.print(nomeDestino != null ? "@" + nomeDestino + ">> " : ">> ");
-          }
-        }
-      });
-
-      threadReceberMensagens.start();
+      ReceberMensagensThread receberMensagensThread = new ReceberMensagensThread(chatRabbit);
+      receberMensagensThread.start();
 
       String destino = null;
       while (true) {
