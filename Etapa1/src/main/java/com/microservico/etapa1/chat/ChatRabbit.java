@@ -49,7 +49,7 @@ public class ChatRabbit {
 
     if (mensagem != null) {
       String mensagemRecebida = new String(mensagem.getBody());
-      System.out.println(mensagemRecebida);
+      //System.out.println(mensagemRecebida);
       return mensagemRecebida;
     } else {
       return null;

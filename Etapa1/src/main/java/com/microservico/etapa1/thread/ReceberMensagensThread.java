@@ -15,6 +15,7 @@ public class ReceberMensagensThread extends Thread {
             String mensagemRecebida = chatRabbit.receberMensagemDaFila();
             String nomeDestino = chatRabbit.getDestino();
             if (mensagemRecebida != null) {
+                System.out.println();
                 System.out.println(mensagemRecebida);
                 System.out.print(nomeDestino != null ? "@" + nomeDestino + ">> " : ">> ");
             }
