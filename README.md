@@ -1,10 +1,3 @@
-# ChatRabbitMQ
-
-
-Instalar: mvn install
-
-Executar: mvn spring-boot:run
-
 ## ChatRabbitMQ
 
 Este é um projeto para a disciplina de Sistemas Distribuidos, desenvolvido por: 
