@@ -13,6 +13,7 @@ public class ReceberMensagensThread extends Thread {
     public void run() {
         while (true) {
             String nomeDestino = chatRabbit.getDestino();
+            //String nomeGrupo = chatRabbit.getGrupo();
             MensagemBuf.Mensagem mensagemRecebida = chatRabbit.receberMensagemDaFila();
             if (mensagemRecebida != null) {
                 System.out.println();
@@ -21,6 +22,7 @@ public class ReceberMensagensThread extends Thread {
                                 mensagemRecebida.getEmissor() + " diz: " +
                                 mensagemRecebida.getConteudo().getCorpo().toStringUtf8()
                 );
+
                 System.out.print(nomeDestino != null ? "@" + nomeDestino + ">> " : ">> ");
             }
         }

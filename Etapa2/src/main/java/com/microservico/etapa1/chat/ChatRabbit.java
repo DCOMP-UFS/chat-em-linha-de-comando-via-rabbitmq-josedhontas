@@ -24,6 +24,8 @@ public class ChatRabbit {
 
   private String destinoNome;
 
+  private String grupoNome;
+
   @Autowired
   public ChatRabbit(AmqpAdmin amqpAdmin) {
     this.amqpAdmin = amqpAdmin;
@@ -53,7 +55,7 @@ public class ChatRabbit {
             .setDestino(getDestino())
             .setData(getData())
             .setHora(getHora())
-            .setGrupo("")
+            .setGrupo(getGrupo())
             .setConteudo(MensagemBuf.Conteudo.newBuilder()
                     .setTipo("aaaa")
                     .setCorpo(ByteString.copyFromUtf8(mensagem2))
@@ -76,16 +78,13 @@ public class ChatRabbit {
   }
 
   public MensagemBuf.Mensagem receberMensagemDaFila() {
-    System.out.println("Tentando receber mensagem da fila: " + this.origemNome);
     Message mensagem = rabbitTemplate.receive(this.origemNome);
 
     if (mensagem != null) {
-      System.out.println("Mensagele");
       byte[] mensagemBytes = mensagem.getBody();
 
       try {
         MensagemBuf.Mensagem mensagemRecebida = MensagemBuf.Mensagem.parseFrom(mensagemBytes);
-        System.out.println("Mensagem recebida: " + mensagemRecebida);
         return mensagemRecebida;
       } catch (InvalidProtocolBufferException e) {
         e.printStackTrace();
@@ -117,6 +116,7 @@ public class ChatRabbit {
 
   public void setDestino(String destinoNome){
     this.destinoNome = destinoNome;
+    //this.grupoNome = null;
     this.criaFila(destinoNome);
   }
 
@@ -128,12 +128,17 @@ public class ChatRabbit {
     return this.origemNome;
   }
 
+  public String getGrupo(){
+    return this.grupoNome;
+  }
+
   public void setOrigem(String origemNome){
     this.origemNome = origemNome;
     this.criaFila(origemNome);
   }
 
   public void criarGrupo(String nomeGrupo) {
+    this.grupoNome = nomeGrupo;
     this.amqpAdmin.declareExchange(new FanoutExchange(nomeGrupo));
   }
 
