@@ -121,15 +121,15 @@ public class ChatRabbit {
   }
 
   public String getDestino(){
-    return this.destinoNome;
+    return this.destinoNome != null ? this.destinoNome : "";
   }
 
   public String getOrigem(){
     return this.origemNome;
   }
 
-  public String getGrupo(){
-    return this.grupoNome;
+  public String getGrupo() {
+    return this.grupoNome != null ? this.grupoNome : "";
   }
 
   public void setOrigem(String origemNome){
@@ -140,6 +140,7 @@ public class ChatRabbit {
   public void criarGrupo(String nomeGrupo) {
     this.grupoNome = nomeGrupo;
     this.amqpAdmin.declareExchange(new FanoutExchange(nomeGrupo));
+    this.adicionarUsuarioAoGrupo(getOrigem(), nomeGrupo);
   }
 
 

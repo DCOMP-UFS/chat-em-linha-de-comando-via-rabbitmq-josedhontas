@@ -54,14 +54,12 @@ public class Etapa2 {
           chatRabbit.excluirGrupo(nomeGrupo);
         } else if (input.startsWith("#") || input.startsWith("@")) {
           textoInput = input;
-          if(input.startsWith("#")){
-            chatRabbit.criarGrupo(input.substring(1));
-          } else{
+          if(input.startsWith("@")){
             chatRabbit.setDestino(input.substring(1));
           }
           String nomeGrupo = input.substring(1);
           chatRabbit.setDestino(nomeGrupo);
-        } else if (input != null) {
+        } else if (textoInput != null) {
           if(textoInput.startsWith("#")){
             chatRabbit.enviarMensagemParaFila(input, textoInput.substring(1));
           }
