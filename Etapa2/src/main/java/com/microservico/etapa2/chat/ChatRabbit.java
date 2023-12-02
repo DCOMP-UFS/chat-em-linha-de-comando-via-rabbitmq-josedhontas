@@ -1,6 +1,7 @@
 package com.microservico.etapa2.chat;
 import com.google.protobuf.ByteString;
 
+
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.mensagem.protobuf.MensagemBuf;
 import org.springframework.amqp.core.*;
@@ -39,14 +40,21 @@ public class ChatRabbit {
   }
 
   public void enviarMensagemParaFila(String mensagem, String nomeGrupo) {
-    if (nomeGrupo != null && !nomeGrupo.isEmpty()) {
+    if (nomeGrupo != null && !nomeGrupo.isEmpty() && verificarGrupoExistente(nomeGrupo)) {
       rabbitTemplate.convertAndSend(nomeGrupo, "", criarNovaMensagem(mensagem));
     } else {
       rabbitTemplate.convertAndSend(NOME_EXCHANGE, this.destinoNome, criarNovaMensagem(mensagem));
     }
   }
 
-
+  public boolean verificarGrupoExistente(String nomeGrupo) {
+    try {
+      amqpAdmin.declareExchange(new FanoutExchange(nomeGrupo));
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
+  }
 
   private byte[] criarNovaMensagem(String mensagem2) {
     MensagemBuf.Mensagem mensagem = MensagemBuf.Mensagem.newBuilder()
