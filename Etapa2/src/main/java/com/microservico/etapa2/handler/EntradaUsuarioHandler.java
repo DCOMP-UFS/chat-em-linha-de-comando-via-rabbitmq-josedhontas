@@ -88,11 +88,11 @@ public class EntradaUsuarioHandler {
     }
 
     private void handleEnviarMensagem(String entradaUsuario, String textoInput) {
-        if(entradaUsuario.length() == 0){
+        if(entradaUsuario.isEmpty()){
             return;
         }
         char prefixo = textoInput.charAt(0);
-        String nomeGrupo = entradaUsuario.substring(1);
+        String nomeGrupo = textoInput.substring(1);
         if(prefixo == '@'){
             chatRabbit.enviarMensagemParaFila(entradaUsuario, "");
         } else{

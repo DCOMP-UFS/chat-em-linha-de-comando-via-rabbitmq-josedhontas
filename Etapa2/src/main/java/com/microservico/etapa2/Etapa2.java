@@ -6,7 +6,6 @@ import com.microservico.etapa2.thread.ReceberMensagensThread;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-
 import java.util.Scanner;
 
 @SpringBootApplication
@@ -20,11 +19,13 @@ public class Etapa2 {
       String nomeUsuario = scanner.nextLine();
       chatRabbit.setOrigem(nomeUsuario);
 
+      // Iniciar a thread para receber mensagens
       ReceberMensagensThread receberMensagensThread = new ReceberMensagensThread(chatRabbit);
       receberMensagensThread.start();
 
       EntradaUsuarioHandler entradaUsuarioHandler = new EntradaUsuarioHandler(chatRabbit, scanner);
       entradaUsuarioHandler.handleEntradaUsuario();
+
     }
   }
 }

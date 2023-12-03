@@ -40,19 +40,12 @@ public class ChatRabbit {
   }
 
   public void enviarMensagemParaFila(String mensagem, String nomeGrupo) {
-    if (nomeGrupo != null && !nomeGrupo.isEmpty() && verificarGrupoExistente(nomeGrupo)) {
+    if (nomeGrupo != null && !nomeGrupo.isEmpty()) {
+      setGrupoNome(nomeGrupo);
       rabbitTemplate.convertAndSend(nomeGrupo, "", criarNovaMensagem(mensagem));
     } else {
+      setGrupoNome("");
       rabbitTemplate.convertAndSend(NOME_EXCHANGE, this.destinoNome, criarNovaMensagem(mensagem));
-    }
-  }
-
-  public boolean verificarGrupoExistente(String nomeGrupo) {
-    try {
-      amqpAdmin.declareExchange(new FanoutExchange(nomeGrupo));
-      return true;
-    } catch (Exception e) {
-      return false;
     }
   }
 
@@ -64,7 +57,7 @@ public class ChatRabbit {
             .setHora(getHora())
             .setGrupo(getGrupo())
             .setConteudo(MensagemBuf.Conteudo.newBuilder()
-                    .setTipo("aaaa")
+                    .setTipo("text/plain")
                     .setCorpo(ByteString.copyFromUtf8(mensagem2))
                     .setNome("")
                     .build())
@@ -91,6 +84,7 @@ public class ChatRabbit {
       byte[] mensagemBytes = mensagem.getBody();
 
       try {
+        //System.out.println("Mensagem recebida");
         MensagemBuf.Mensagem mensagemRecebida = MensagemBuf.Mensagem.parseFrom(mensagemBytes);
         return mensagemRecebida;
       } catch (InvalidProtocolBufferException e) {
@@ -123,7 +117,6 @@ public class ChatRabbit {
 
   public void setDestino(String destinoNome){
     this.destinoNome = destinoNome;
-    //this.grupoNome = null;
     this.criaFila(destinoNome);
   }
 
@@ -144,8 +137,13 @@ public class ChatRabbit {
     this.criaFila(origemNome);
   }
 
-  public void criarGrupo(String nomeGrupo) {
+
+  public void setGrupoNome(String nomeGrupo){
     this.grupoNome = nomeGrupo;
+  }
+
+  public void criarGrupo(String nomeGrupo) {
+    setGrupoNome(nomeGrupo);
     this.amqpAdmin.declareExchange(new FanoutExchange(nomeGrupo));
     this.adicionarUsuarioAoGrupo(getOrigem(), nomeGrupo);
   }
