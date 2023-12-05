@@ -15,7 +15,7 @@ public class Etapa2 {
       ChatRabbit chatRabbit = applicationContext.getBean(ChatRabbit.class);
       Scanner scanner = new Scanner(System.in);
 
-      System.out.print(">> ");
+      System.out.print("User: ");
       String nomeUsuario = scanner.nextLine();
       chatRabbit.setOrigem(nomeUsuario);
 
