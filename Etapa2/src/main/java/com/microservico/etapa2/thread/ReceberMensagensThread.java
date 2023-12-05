@@ -23,7 +23,7 @@ public class ReceberMensagensThread extends Thread {
                                 mensagemRecebida.getConteudo().getCorpo().toStringUtf8()
                 );
                 if(nomeGrupo.trim().isEmpty()){
-                    System.out.print(nomeDestino != null ? "@" + nomeDestino + ">> " : ">> ");
+                    System.out.print(!nomeDestino.isEmpty() ? "@" + nomeDestino + ">> " : ">> ");
                 }
                 else {
                     System.out.print("#" + nomeGrupo + ">> ");

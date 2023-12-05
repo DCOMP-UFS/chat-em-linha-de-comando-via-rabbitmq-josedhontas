@@ -36,7 +36,7 @@ public class ChatRabbit {
   private RabbitTemplate rabbitTemplate;
 
   private Queue fila(String nomeFila) {
-    return new Queue(nomeFila, false, false, false);
+    return new Queue(nomeFila, true, false, false);
   }
 
   public void enviarMensagemParaFila(String mensagem, String nomeGrupo) {
