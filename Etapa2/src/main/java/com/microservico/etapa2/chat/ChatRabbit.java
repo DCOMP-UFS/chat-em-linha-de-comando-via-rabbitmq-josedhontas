@@ -39,7 +39,19 @@ public class ChatRabbit {
     return new Queue(nomeFila, true, false, false);
   }
 
-  public void enviarMensagemParaFila(String mensagem, String nomeGrupo) {
+  public void enviarMensagem(String mensagem, String nomeGrupo) {
+    if (nomeGrupo != null && !nomeGrupo.isEmpty()) {
+      setGrupoNome(nomeGrupo);
+      criarGrupo(nomeGrupo); // para evitar o erro ao mandar mensagem para grupo inexistente
+      rabbitTemplate.convertAndSend(nomeGrupo, "", criarNovaMensagem(mensagem));
+    } else {
+      setGrupoNome("");
+      rabbitTemplate.convertAndSend(NOME_EXCHANGE, this.destinoNome, criarNovaMensagem(mensagem));
+    }
+  }
+
+
+  public void enviarArquivo(String mensagem, String nomeGrupo) {
     if (nomeGrupo != null && !nomeGrupo.isEmpty()) {
       setGrupoNome(nomeGrupo);
       rabbitTemplate.convertAndSend(nomeGrupo, "", criarNovaMensagem(mensagem));
@@ -52,7 +64,6 @@ public class ChatRabbit {
   private byte[] criarNovaMensagem(String mensagem2) {
     MensagemBuf.Mensagem mensagem = MensagemBuf.Mensagem.newBuilder()
             .setEmissor(getOrigem())
-            .setDestino(getDestino())
             .setData(getData())
             .setHora(getHora())
             .setGrupo(getGrupo())

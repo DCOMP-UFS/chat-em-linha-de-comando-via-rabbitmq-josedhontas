@@ -94,9 +94,9 @@ public class EntradaUsuarioHandler {
         char prefixo = textoInput.charAt(0);
         String nomeGrupo = textoInput.substring(1);
         if(prefixo == '@'){
-            chatRabbit.enviarMensagemParaFila(entradaUsuario, "");
+            chatRabbit.enviarMensagem(entradaUsuario, "");
         } else{
-            chatRabbit.enviarMensagemParaFila(entradaUsuario, nomeGrupo);
+            chatRabbit.enviarMensagem(entradaUsuario, nomeGrupo);
         }
     }
 }
