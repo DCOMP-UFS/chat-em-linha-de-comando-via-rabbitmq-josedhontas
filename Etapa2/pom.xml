@@ -9,10 +9,10 @@
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
   <groupId>com.microservico</groupId>
-  <artifactId>etapa1</artifactId>
+  <artifactId>etapa2</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>estoquepreco</name>
-  <description>API Rest Estoque Preço com RabbitMQ</description>
+  <name>etapa2</name>
+  <description>Projetinho de sd</description>
   <properties>
     <java.version>11</java.version>
   </properties>

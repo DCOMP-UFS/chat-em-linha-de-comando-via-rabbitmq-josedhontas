@@ -11,8 +11,8 @@
   <groupId>com.microservico</groupId>
   <artifactId>etapa1</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>estoquepreco</name>
-  <description>API Rest Estoque Preço com RabbitMQ</description>
+  <name>etapa1</name>
+  <description>Projetinho sd</description>
   <properties>
     <java.version>11</java.version>
   </properties>
