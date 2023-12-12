@@ -39,26 +39,16 @@ public class ChatRabbit {
     return new Queue(nomeFila, true, false, false);
   }
 
-  public void enviarMensagem(String mensagem, String nomeGrupo) {
-    if (nomeGrupo != null && !nomeGrupo.isEmpty()) {
-      setGrupoNome(nomeGrupo);
-      criarGrupo(nomeGrupo); // para evitar o erro ao mandar mensagem para grupo inexistente
-      rabbitTemplate.convertAndSend(nomeGrupo, "", criarNovaMensagem(mensagem));
-    } else {
+  public void enviarMensagem(String mensagem) {
       setGrupoNome("");
-      rabbitTemplate.convertAndSend(NOME_EXCHANGE, this.destinoNome, criarNovaMensagem(mensagem));
-    }
+      rabbitTemplate.convertAndSend(NOME_EXCHANGE, getDestino(), criarNovaMensagem(mensagem));
   }
 
 
-  public void enviarArquivo(String mensagem, String nomeGrupo) {
-    if (nomeGrupo != null && !nomeGrupo.isEmpty()) {
+  public void enviarMensagem(String mensagem, String nomeGrupo) {
       setGrupoNome(nomeGrupo);
+      criarGrupo(nomeGrupo); // para evitar o erro ao mandar mensagem para grupo inexistente
       rabbitTemplate.convertAndSend(nomeGrupo, "", criarNovaMensagem(mensagem));
-    } else {
-      setGrupoNome("");
-      rabbitTemplate.convertAndSend(NOME_EXCHANGE, this.destinoNome, criarNovaMensagem(mensagem));
-    }
   }
 
   private byte[] criarNovaMensagem(String mensagem2) {
@@ -171,8 +161,6 @@ public class ChatRabbit {
     this.amqpAdmin.declareExchange(trocaGrupo);
     this.amqpAdmin.declareBinding(ligacao);
   }
-
-
 
   public void removerUsuarioDoGrupo(String usuario, String nomeGrupo) {
     this.amqpAdmin.removeBinding(this.relacionamentoGrupo(this.fila(usuario), new FanoutExchange(nomeGrupo)));
