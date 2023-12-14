@@ -3,6 +3,7 @@
 Este é um projeto para a disciplina de Sistemas Distribuidos, desenvolvido por: 
 - José Dhonatas Alves Sales
 - João Victor Mota Santos
+- David Henrique de Oliveira Ferraz
 
 ## Tecnologia:
 - Java Spring
