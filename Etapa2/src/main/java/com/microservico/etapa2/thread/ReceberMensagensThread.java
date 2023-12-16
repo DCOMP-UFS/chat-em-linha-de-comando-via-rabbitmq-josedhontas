@@ -26,7 +26,7 @@ public class ReceberMensagensThread extends Thread {
                     System.out.print(!nomeDestino.isEmpty() ? "@" + nomeDestino + ">> " : ">> ");
                 }
                 else {
-                    System.out.print("#" + nomeGrupo + ">> ");
+                    System.out.print("#" + chatRabbit.getGrupo() + ">> ");
                 }}
         }
     }
