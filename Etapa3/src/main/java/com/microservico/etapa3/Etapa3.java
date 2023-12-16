@@ -23,10 +23,6 @@ public class Etapa3 {
       ReceberMensagensThread receberMensagensThread = new ReceberMensagensThread(chatRabbit);
       receberMensagensThread.start();
 
-      BaixarArquivoThread baixarArquivoThread = new BaixarArquivoThread(chatRabbit);
-      baixarArquivoThread.start();
-
-
       EntradaUsuarioHandler entradaUsuarioHandler = new EntradaUsuarioHandler(chatRabbit, scanner);
       entradaUsuarioHandler.handleEntradaUsuario();
     }

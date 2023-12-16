@@ -2,6 +2,7 @@
 package com.microservico.etapa3.handler;
 
 import com.microservico.etapa3.chat.ChatRabbit;
+import com.microservico.etapa3.thread.BaixarArquivoThread;
 import com.microservico.etapa3.thread.EnviarArquivoThread;
 
 import java.util.Scanner;
@@ -18,6 +19,8 @@ public class EntradaUsuarioHandler {
     }
 
     public void handleEntradaUsuario() {
+        BaixarArquivoThread baixarArquivoThread = new BaixarArquivoThread(chatRabbit);
+        baixarArquivoThread.start();
         textoInput = null;
 
         while (true) {

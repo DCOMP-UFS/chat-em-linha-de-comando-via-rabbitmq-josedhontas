@@ -19,15 +19,24 @@ public class BaixarArquivoThread extends Thread {
                 if (mensagem != null) {
                     String tipo = mensagem.getConteudo().getTipo();
                     if (!"texto".equals(tipo)) {
-                        //System.out.println(mensagem);
                         String conteudoArquivo = mensagem.getConteudo().getCorpo().toStringUtf8();
+                        String nomeDestino = chatRabbit.getDestino();
+                        String nomeGrupo = mensagem.getGrupo();
+                        String nomeEmissor = mensagem.getEmissor();
                         String nomeArquivo = mensagem.getConteudo().getNome();
-
                         try (FileOutputStream outputStream = new FileOutputStream(nomeArquivo)) {
                             outputStream.write(mensagem.getConteudo().getCorpo().toByteArray());
                             System.out.println();
-                            System.out.println("Arquivo " + mensagem.getConteudo().getNome() + " recebido de " + "@" + mensagem.getEmissor());
-                            System.out.print(">> ");
+                            System.out.println(
+                                    "(" + mensagem.getData() + " às " + mensagem.getHora() + ") " + "Arquivo "+ nomeArquivo+ " recebido de " +
+                                            nomeEmissor +  (nomeGrupo.isEmpty() ? " !" : "#" + nomeGrupo)
+                            );
+                            if(nomeGrupo.trim().isEmpty()){
+                                System.out.print(!nomeDestino.isEmpty() ? "@" + nomeDestino + ">> " : ">> ");
+                            }
+                            else {
+                                System.out.print("#" + chatRabbit.getGrupo() + ">> ");
+                            }
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

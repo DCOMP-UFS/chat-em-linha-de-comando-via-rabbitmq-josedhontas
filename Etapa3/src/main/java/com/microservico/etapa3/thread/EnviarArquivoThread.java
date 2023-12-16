@@ -14,7 +14,15 @@ public class EnviarArquivoThread extends Thread {
 
     @Override
     public void run() {
+        String nomeDestino = chatRabbit.getDestino();
+        String nomeGrupo = chatRabbit.getGrupo();
         chatRabbit.enviarArquivo(arquivo);
+        if (nomeGrupo.trim().isEmpty()) {
+            System.out.print(!nomeDestino.isEmpty() ? "@" + nomeDestino + ">> " : ">> ");
+        } else {
+            System.out.print("#" + chatRabbit.getGrupo() + ">> ");
+        }
+
     }
 }
 
