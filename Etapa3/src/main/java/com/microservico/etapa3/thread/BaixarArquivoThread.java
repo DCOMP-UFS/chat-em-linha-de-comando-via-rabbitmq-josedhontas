@@ -13,13 +13,12 @@ public class BaixarArquivoThread extends Thread {
     @Override
     public void run() {
         while (true) {
-            String nomeFila = chatRabbit.getOrigem() + "Arquivo";
             try {
-                MensagemBuf.Mensagem mensagem = chatRabbit.receberMensagemDaFila(nomeFila);
+                MensagemBuf.Mensagem mensagem = chatRabbit.receberArquivoDaFila();
                 if (mensagem != null) {
                     String tipo = mensagem.getConteudo().getTipo();
                     if (!"texto".equals(tipo)) {
-                        String conteudoArquivo = mensagem.getConteudo().getCorpo().toStringUtf8();
+                        //String conteudoArquivo = mensagem.getConteudo().getCorpo().toStringUtf8();
                         String nomeDestino = chatRabbit.getDestino();
                         String nomeGrupo = mensagem.getGrupo();
                         String nomeEmissor = mensagem.getEmissor();

@@ -123,9 +123,25 @@ public class ChatRabbit {
     return timestamp.format(formatter);
   }
 
-  public MensagemBuf.Mensagem receberMensagemDaFila(String filaArquivo) {
-    String origemNome = filaArquivo.isEmpty() ? this.origemNome : filaArquivo;
-    Message mensagem = rabbitTemplate.receive(origemNome);
+  public MensagemBuf.Mensagem receberMensagemDaFila() {
+    Message mensagem = rabbitTemplate.receive(getOrigem());
+    if (mensagem != null) {
+      byte[] mensagemBytes = mensagem.getBody();
+
+      try {
+        //System.out.println("Mensagem recebida");
+        MensagemBuf.Mensagem mensagemRecebida = MensagemBuf.Mensagem.parseFrom(mensagemBytes);
+        return mensagemRecebida;
+      } catch (InvalidProtocolBufferException e) {
+        e.printStackTrace();
+      }
+    }
+    return null;
+  }
+
+
+  public MensagemBuf.Mensagem receberArquivoDaFila() {
+    Message mensagem = rabbitTemplate.receive(getOrigem()+"Arquivo");
     if (mensagem != null) {
       byte[] mensagemBytes = mensagem.getBody();
 

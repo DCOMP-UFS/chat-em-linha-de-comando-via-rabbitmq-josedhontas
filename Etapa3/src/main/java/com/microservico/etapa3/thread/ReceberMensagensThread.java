@@ -13,7 +13,7 @@ public class ReceberMensagensThread extends Thread {
     public void run() {
         while (true) {
             Integer soma;
-            MensagemBuf.Mensagem mensagemRecebida = chatRabbit.receberMensagemDaFila("");
+            MensagemBuf.Mensagem mensagemRecebida = chatRabbit.receberMensagemDaFila();
             if (mensagemRecebida != null && !mensagemRecebida.getEmissor().equals(chatRabbit.getOrigem())) {
                 String nomeGrupo = mensagemRecebida.getGrupo();
                 String nomeDestino = chatRabbit.getDestino();

@@ -35,7 +35,7 @@ public class EntradaUsuarioHandler {
                 handleRemoverUsuario(entradaUsuario);
             } else if (entradaUsuario.startsWith("!removeGroup")) {
                 handleExcluirGrupo(entradaUsuario);
-            } else if(entradaUsuario.startsWith("!uploud")){
+            } else if(entradaUsuario.startsWith("!upload")){
                 handlerEnviarArquivo(entradaUsuario, textoInput);
             }
             else if (entradaUsuario.startsWith("@")) {
@@ -113,11 +113,13 @@ public class EntradaUsuarioHandler {
         }
         char prefixo = textoInput.charAt(0);
         String nomeGrupo = textoInput.substring(1);
+        String nomeArquivo = entradaUsuario.substring("!upload ".length());
+
         if(prefixo == '@'){;
-            EnviarArquivoThread enviarArquivoThread = new EnviarArquivoThread(chatRabbit, "C:\\Users\\dhona\\Downloads\\Yu Yu Hakusho Episodio 21  Dublado.mp4");
+            EnviarArquivoThread enviarArquivoThread = new EnviarArquivoThread(chatRabbit, nomeArquivo);
             enviarArquivoThread.start();
         } else{
-            //chatRabbit.enviarArquivo(entradaUsuario, nomeGrupo);
+            chatRabbit.enviarArquivo(nomeArquivo, nomeGrupo);
         }
     }
 }
