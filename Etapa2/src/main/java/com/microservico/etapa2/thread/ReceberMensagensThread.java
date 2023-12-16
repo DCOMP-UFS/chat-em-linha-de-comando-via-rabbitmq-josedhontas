@@ -12,14 +12,14 @@ public class ReceberMensagensThread extends Thread {
     @Override
     public void run() {
         while (true) {
-            MensagemBuf.Mensagem mensagemRecebida = chatRabbit.receberMensagemDaFila();
+            MensagemBuf.Mensagem mensagemRecebida = chatRabbit.receberMensagemDaFila("");
             if (mensagemRecebida != null && !mensagemRecebida.getEmissor().equals(chatRabbit.getOrigem())) {
-                String nomeGrupo = chatRabbit.getGrupo();
+                String nomeGrupo = mensagemRecebida.getGrupo();
                 String nomeDestino = chatRabbit.getDestino();
                 System.out.println();
                 System.out.println(
                         "(" + mensagemRecebida.getData() + " às " + mensagemRecebida.getHora() + ") " +
-                                mensagemRecebida.getEmissor() +  (nomeGrupo.trim().isEmpty() ? "" : "#" + nomeGrupo) +" diz: " +
+                                mensagemRecebida.getEmissor() +  (nomeGrupo.isEmpty() ? "" : "#" + nomeGrupo) +" diz: " +
                                 mensagemRecebida.getConteudo().getCorpo().toStringUtf8()
                 );
                 if(nomeGrupo.trim().isEmpty()){
