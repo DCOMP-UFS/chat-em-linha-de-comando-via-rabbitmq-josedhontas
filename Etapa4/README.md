@@ -47,12 +47,16 @@ sudo su
 nano /var/lib/rabbitmq/.erlang.cookie
 ```
 Ele irá abrir o cookie do `node2` em modo edição, apague o conteudo existente e cole o cookie de `node1` descrito na etapa 6.
+Em seguida aperte CTRL+O e CTRL+X, isso irá fazer com que o conteudo seja salvo e a janela seja fechada.
 
+### Passo 7: Aplicação do cookie de `node1` em `node3`
+Repita o processo descrito no passo anterior para o `node3`
 
-### Exemplo de Comando Maven
-
-Além disso, após a configuração do RabbitMQ, você pode usar o seguinte comando Maven para instalar dependências:
-
+### Passo 8: Atribuição de nomes para hosts
+Copie o endereço de ip privado de cada `node`, cole no bloco de notas e ao lado insira o nome do `node`. Por exemplo:
 ```shell script
-mvn install
+192.168.0.1 node1
+192.168.0.2 node2
+192.168.0.3 node3
 ```
+Note que nesse exemplo os endereços ip são meramente demonstrativos, você deve preencher com o real endereço ip privado de cada `node` respectivo
