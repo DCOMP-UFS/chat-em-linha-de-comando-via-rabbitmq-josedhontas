@@ -52,7 +52,7 @@ Em seguida aperte CTRL+O e CTRL+X, isso irá fazer com que o conteudo seja salvo
 ### Passo 7: Aplicação do cookie de `node1` em `node3`
 Repita o processo descrito no passo anterior para o `node3`
 
-### Passo 8: Atribuição de nomes para hosts
+### Passo 8: Nomes para hosts
 Copie o endereço de ip privado de cada `node`, cole no bloco de notas e ao lado insira o nome do `node`. Por exemplo:
 ```shell script
 192.168.0.1 node1
@@ -60,3 +60,34 @@ Copie o endereço de ip privado de cada `node`, cole no bloco de notas e ao lado
 192.168.0.3 node3
 ```
 Note que nesse exemplo os endereços ip são meramente demonstrativos, você deve preencher com o real endereço ip privado de cada `node` respectivo
+
+### Passo 9: Atribuição de nome para o `node1`
+Use o seguinte comando:
+```shell script
+sudo su nano /etc/hosts
+```
+Cole o conteudo criado por você no bloco de notas, salve e saia da janela (CTRL+O e CTRL+X)
+
+Execute: 
+```shell script
+sudo apt update
+```
+E depois execute: 
+```shell script
+sudo hostnamectl set-hostname node1 --static
+```
+
+
+### Passo 9: Atribuição de nome para o `node2` e `node3`
+Repita o mesmo processo descrito no passo 9, mas lembre de alterar o ultimo comando. Se voce estiver realizando esta etapa no `node2` execute: 
+```shell script
+sudo hostnamectl set-hostname node2 --static
+```
+Caso seja em `node3`:
+```shell script
+sudo hostnamectl set-hostname node3 --static
+```
+Note que só foi alterado no nome do `node` 
+
+
+
