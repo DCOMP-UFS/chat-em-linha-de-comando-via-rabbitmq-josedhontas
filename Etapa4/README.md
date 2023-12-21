@@ -26,6 +26,29 @@ Instale o RabbitMQ no `node2`, mas evite criar um usuário. Isso significa que v
 
 Repita o mesmo processo descrito anteriormente para o `node3`.
 
+### Passo 5: Parar `node2` e `node3`
+Execute o seguinte comando em `node2` e `node2`:
+```shell script
+sudo rabbitmqctl stop_app
+```
+
+### Passo 6: Obtenção do cookie de `node1`
+Execute o seguinte comando em `node1` para obter seu cookie e salve-o no bloco de notas
+```shell script
+sudo cat /var/lib/rabbitmq/.erlang.cookie
+```
+
+### Passo 7: Aplicação do cookie de `node1` em `node2`
+Execute os seguintes comando: 
+```shell script
+sudo su
+```
+```shell script
+nano /var/lib/rabbitmq/.erlang.cookie
+```
+Ele irá abrir o cookie do `node2` em modo edição, apague o conteudo existente e cole o cookie de `node1` descrito na etapa 6.
+
+
 ### Exemplo de Comando Maven
 
 Além disso, após a configuração do RabbitMQ, você pode usar o seguinte comando Maven para instalar dependências:
