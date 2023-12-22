@@ -78,7 +78,7 @@ sudo hostnamectl set-hostname node1 --static
 ```
 
 
-### Passo 9: Atribuição de nome para o `node2` e `node3`
+### Passo 10: Atribuição de nome para o `node2` e `node3`
 Repita o mesmo processo descrito no passo 9, mas lembre de alterar o ultimo comando. Se voce estiver realizando esta etapa no `node2` execute: 
 ```shell script
 sudo hostnamectl set-hostname node2 --static
@@ -89,5 +89,32 @@ sudo hostnamectl set-hostname node3 --static
 ```
 Note que só foi alterado no nome do `node` 
 
+### Passo 11: Reinicialização de serviço e vm:
+Em todos os `nodes` execute o comando:
+```shell script
+systemctl restart rabbitmq-server.service
+```
+Em seguida reinicie a maquina via terminal ou pelo aws:
+```shell script
+sudo reboot
+```
+
+### Passo 12: Conexão com o Cluster
+Após reinicializados lembre de parar o RabbitMQ em `node2` e `node`. Use o comando do passo 5.
+Depois disso conecte `node2` e `node3` com `node1`, use os seguintes comandos: 
+```shell script
+sudo rabbitmqctl join_cluster rabbit@node1
+```
+```shell script
+sudo rabbitmqctl start_app
+```
+
+
+### Passo 13: Status do Cluster
+Execute o seguinte comando no `node1`:
+```shell script
+rabbitmqctl cluster_status
+```
+Com esse comando será retornado o status do cluster e com seus `nodes`
 
 
