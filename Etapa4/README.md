@@ -6,7 +6,7 @@ Este tutorial aborda a 4ª etapa do projeto, que inclui os seguintes tópicos:
 
 ## Requisitos
 
-Antes de prosseguir com este tutorial, certifique-se de ter concluído a etapa de instalação do RabbitMQ e compreendido os conceitos básicos.
+Antes de prosseguir com este tutorial, certifique-se de ter concluído a etapa de instalação do RabbitMQ e compreendido os conceitos básicos. Também será preciso liberar as portas: 15672, 4369, 5672 e 
 
 ## Configuração do Cluster RabbitMQ
 
