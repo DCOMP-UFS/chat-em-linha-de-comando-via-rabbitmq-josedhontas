@@ -1,0 +1,4 @@
+voce esta usando o host padrao, portanto deve usar: 
+curl -u admin:password http://localhost:15672/api/queues/%2F/joao/bindings
+
+use %2F
