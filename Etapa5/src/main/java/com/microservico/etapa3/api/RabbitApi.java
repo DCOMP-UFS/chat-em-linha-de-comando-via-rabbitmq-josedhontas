@@ -53,9 +53,9 @@ public class RabbitApi {
         JsonNode jsonNode = objectMapper.readTree(json);
 
         for (JsonNode node : jsonNode) {
-            String sourceValue = node.get("destination").asText();
-            if(!sourceValue.isEmpty() && !sourceValue.equals("amq.direct")){
-                System.out.print(sourceValue + ", ");
+            String destinationValue = node.get("destination").asText();
+            if (!destinationValue.isEmpty() && !destinationValue.contains("Arquivo")) {
+                System.out.print(destinationValue + ", ");
             }
         }
         System.out.println();

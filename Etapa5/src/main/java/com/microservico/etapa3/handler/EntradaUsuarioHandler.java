@@ -31,7 +31,7 @@ public class EntradaUsuarioHandler {
             System.out.print(textoInput != null ? textoInput + ">> " : ">> ");
             String entradaUsuario = scanner.nextLine();
 
-            if (entradaUsuario.startsWith("!addGroup")) {
+            if (entradaUsuario.startsWith("!addGroup ")) {
                 handleCriarGrupo(entradaUsuario);
             } else if (entradaUsuario.startsWith("!addUser")) {
                 handleAdicionarUsuario(entradaUsuario);
@@ -42,7 +42,7 @@ public class EntradaUsuarioHandler {
             } else if(entradaUsuario.startsWith("!upload")){
                 handlerEnviarArquivo(entradaUsuario, textoInput);
             }
-            else if(entradaUsuario.startsWith("!listUsers")){
+            else if(entradaUsuario.startsWith("!listUsers ")){
                 handlerListarUsuariosGrupo(entradaUsuario);
             }
             else if(entradaUsuario.startsWith("!listGroups")){
@@ -92,6 +92,10 @@ public class EntradaUsuarioHandler {
 
     private void handleCriarGrupo(String entradaUsuario) {
         String nomeGrupo = entradaUsuario.substring("!addGroup ".length());
+        System.out.println(nomeGrupo);
+        if(nomeGrupo.isEmpty() || nomeGrupo == null){
+            return;
+        }
         chatRabbit.criarGrupo(nomeGrupo);
     }
 
